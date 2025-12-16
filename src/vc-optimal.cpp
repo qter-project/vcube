@@ -25,6 +25,7 @@
 #include <utility>
 #include <algorithm>
 #include <deque>
+#include <filesystem>
 #include <getopt.h>
 #include <libgen.h>
 #include <sys/resource.h>
@@ -289,14 +290,14 @@ void usage(const char *argv0, int status) {
 }
 
 std::string base_path(const char *argv0) {
-	char *tmp = realpath(argv0, NULL);
-	if (!tmp) {
-	 	perror("realpath");
-		exit(EXIT_FAILURE);
-	}
-	std::string path(dirname(tmp));
-	free(tmp);
-	return path;
+	// char *tmp = realpath(argv0, NULL);
+	// if (!tmp) {
+	//  	perror("realpath");
+	// 	exit(EXIT_FAILURE);
+	// }
+	// std::string path(dirname(tmp));
+	// free(tmp);
+	return std::filesystem::current_path();
 }
 
 class cpu_clock {
